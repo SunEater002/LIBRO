@@ -1,0 +1,284 @@
+:root {
+  --noche: #0e1020;
+  --azul: #1d3a5f;
+  --rojo: #8c1c1c;
+  --papel: #efe6d2;
+  --tinta: #2a2118;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 30%, #1a1f3a 0%, var(--noche) 70%);
+  color: var(--papel);
+  font-family: Georgia, "Times New Roman", serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.estrellas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.estrellas i {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: titila 3s infinite alternate;
+}
+
+@keyframes titila {
+  to {
+    opacity: 0.1;
+  }
+}
+
+.escena {
+  perspective: 1800px;
+}
+
+.libro {
+  position: relative;
+  width: min(86vw, 360px);
+  aspect-ratio: 3 / 4.2;
+  transform-style: preserve-3d;
+  transition: transform 1.2s ease;
+}
+
+.libro.abierto {
+  transform: translateX(50%);
+}
+
+.tapa {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 1.2s ease;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.libro.abierto .tapa {
+  transform: rotateY(-180deg);
+}
+
+.tapa .cara {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 4px 10px 10px 4px;
+}
+
+.frente {
+  background: linear-gradient(145deg, #16294a, #0b1427);
+  border: 2px solid #31507d;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  text-align: center;
+  padding: 24px;
+}
+
+.frente h1 {
+  font-size: clamp(2.2rem, 9vw, 3rem);
+  letter-spacing: 0.08em;
+  color: #e9d9b6;
+  text-shadow: 0 0 18px rgba(200, 40, 40, 0.5);
+}
+
+.frente p {
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+.frente .pista {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  animation: late 2s infinite;
+}
+
+@keyframes late {
+  50% {
+    opacity: 0.15;
+  }
+}
+
+.adorno {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.boton {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #05070d;
+  border: 2px solid #4a6a99;
+  position: relative;
+}
+
+.boton::before,
+.boton::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #4a6a99;
+  border-radius: 50%;
+  top: 8px;
+}
+
+.boton::before {
+  left: 6px;
+}
+
+.boton::after {
+  right: 6px;
+}
+
+.llave {
+  width: 70px;
+  height: 26px;
+  position: relative;
+}
+
+.llave::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 22px;
+  height: 22px;
+  border: 4px solid #c9a55a;
+  border-radius: 50%;
+}
+
+.llave::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 11px;
+  width: 46px;
+  height: 4px;
+  background: #c9a55a;
+  box-shadow: 0 0 0 #c9a55a, 30px 5px 0 -1px #c9a55a, 40px 5px 0 -1px #c9a55a;
+}
+
+.reverso {
+  background: var(--papel);
+  transform: rotateY(180deg);
+}
+
+.paginas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--papel);
+  color: var(--tinta);
+  border-radius: 4px 10px 10px 4px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.6s;
+}
+
+.libro.abierto .paginas {
+  opacity: 1;
+}
+
+.paginas h2 {
+  font-size: 1.5rem;
+  color: var(--rojo);
+}
+
+.paginas p {
+  line-height: 1.6;
+  font-size: 1rem;
+  white-space: pre-line;
+}
+
+.firma {
+  font-style: italic;
+  color: var(--azul);
+}
+
+.puerta {
+  display:block;
+  width: 64px;
+  height: 100px;
+  flex: 0 0 100px;
+  border: 3px solid #5a3a1e;
+  border-radius: 34px 34px 3px 3px;
+  background: linear-gradient(#7b5330, #4d2f17);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.puerta::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 54px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c9a55a;
+}
+
+.puerta:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 22px rgba(201, 165, 90, 0.7);
+}
+
+.leyenda {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  .libro.abierto {
+    transform: translateX(0);
+  }
+
+  .paginas {
+    padding: 18px 14px;
+    gap: 10px;
+  }
+
+  .paginas p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .puerta {
+    height: 86px;
+    flex-basis: 86px;
+  }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Un libro para ti</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="estrellas" id="estrellas"></div>
+
+  <div class="escena">
+    <div class="libro" id="libro">
+      <div class="paginas">
+        <h2 id="titulo-dedicatoria"></h2>
+        <p id="mensaje"></p>
+        <p class="firma" id="firma"></p>
+        <a class="puerta" id="puerta" title="Abrir PDF" aria-label="Abrir PDF" target="_blank" rel="noopener"></a>
+        <span class="leyenda">toca la puertita</span>
+      </div>
+
+      <div class="tapa" id="tapa">
+        <div class="cara frente">
+          <div class="adorno"><div class="boton"></div><div class="llave"></div><div class="boton"></div></div>
+          <h1>CORALINE</h1>
+          <p>Un regalo para ti</p>
+          <span class="pista">toca para abrir</span>
+        </div>
+        <div class="cara reverso"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CONFIG = {
+      nombre: "Corazon ",
+      mensaje: "Sé que te encanta este mundo,\npor eso quise regalarte\nuna puertita hacia él.\n\nQue disfrutes cada página, me tarde un poco en encontralo",
+      firma: "— Con cariño, Yo jaja ",
+      pdf: "Coraline.pdf"
+    };
+
+    document.getElementById("titulo-dedicatoria").textContent = "" + CONFIG.nombre;
+    document.getElementById("mensaje").textContent = CONFIG.mensaje;
+    document.getElementById("firma").textContent = CONFIG.firma;
+    document.getElementById("puerta").href = CONFIG.pdf;
+
+    const contenedorEstrellas = document.getElementById("estrellas");
+    for (let i = 0; i < 70; i++) {
+      const estrella = document.createElement("i");
+      estrella.style.left = Math.random() * 100 + "%";
+      estrella.style.top = Math.random() * 100 + "%";
+      estrella.style.animationDelay = Math.random() * 3 + "s";
+      contenedorEstrellas.appendChild(estrella);
+    }
+
+    const libro = document.getElementById("libro");
+    document.getElementById("tapa").addEventListener("click", () => {
+      libro.classList.toggle("abierto");
+    });
+  </script>
+</body>
+</html>
